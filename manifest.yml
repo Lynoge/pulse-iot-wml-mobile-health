@@ -1,8 +1,8 @@
 ---
 declared-services:
   servico_iot:
-	label: iotf_service
-	plan: standard
+     label: iotf_service
+     plan: standard
 applications:
 - name: iotf-service-demo
   path: .
