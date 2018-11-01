@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>MyPulse</title>
+	<title>Pulsação</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -18,20 +18,20 @@
 </head>
 
 <body onload="bodyLoaded();">
-	<h4 align="center"><font color="black">MyPulse - IoT WML Mobile Health App</font></h4>
+	<h4 align="center"><font color="black">Pulsação - Medidor de Batimentos (Paixão) com IoT, WML (Watson Machine Learning) em Dispositivos Móveis (Mobile)</font></h4>
 	<div id="output" align="center">
 		<img src="/img/heart.png" height="77" width="77">
 	</div><br>
-	<div align="center"><h4><font color="red">Click once on the heart image and <i><u>firmly</u></i> press the bottom of your smartphone against your chest and wait <i><u>without moving</u></i> until the pulse rate values listed below the pulse graph (~1 min).</font></h4>
+	<div align="center"><h4><font color="red">Clique uma vez na imagem do coração e <i><u>firmemente</u></i> pressione a parte inferior do smartphone contra o peito e espere <i><u> sem se mover </u></i> até os valores da taxa de pulso serem listados abaixo do gráfico de pulso (~1 min).</font></h4>
 	<div id="graph" style="width:850px; height:200px;"></div></div>
 	<div class="main" align="center">
 		<div class="container">
-			<div id="header">Pulse Rate Values & Prediction
+			<div id="header">Valores de taxa de pulso e previsão
 			</div><div id="pulse"> - BPM - </div><br>
 		  <table align="center">
-				<div id="header">Watson IoT Platform Connectivity & Gyro Events
+				<div id="header">Conectividade Watson IoT Platform & Eventos Gyro
 				</div><tr>
-					<td id="connStatus">Disconnected</td>
+					<td id="connStatus">Desconectado</td>
 				</tr>
 				<tr>
 					<td id="devId"></td>
@@ -60,21 +60,21 @@
 					<td id="location"></td>
 				</tr>
 			</table><br>
-				<div id="header">Watson Machine Learning (WML) Predictive Pulse Rate
+				<div id="header"> Taxa de pulsação preditiva Watson Machine Learning (WML)
 				</div><div class="row">
 					<div class="input-field col s12">
-						<label for="heart_beats">Heart Beats</label>
+						<label for="heart_beats">Batimentos cardíacos</label>
 						<input id="heart_beats" type="number" value="7" required>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<label for="time_in_secs">Seconds</label>
+						<label for="time_in_secs">Segundos</label>
 						<input id="time_in_secs" type="number" value="6" required>
 					</div>
 				</div>
 				<div class="row">
-					<a id="submit" class="waves-effect waves-light btn">Submit</a>
+					<a id="submit" class="waves-effect waves-light btn">Enviar</a>
 				</div>
 				<div id="loading" class="row" style="display: none;">
 					<div class="progress">
@@ -82,7 +82,7 @@
 					</div>
 				</div>
 				<div id="prediction" class="row" style="display: none;">
-					Prediction:
+					Predição:
 					<span id="bpm"></span>
 				</div>
 			</div>
@@ -91,13 +91,13 @@
 	<div class="container" align="center">
 		<table align="center">
 			<tr>
-				<td><u>General BPM Rates Info</u></td>
+				<td><u>Informações gerais sobre as taxas de BPM</u></td>
 			</tr>
 			<tr>
-				<td>BPM < 50 - Bradycardia<br>50 < BPM < 90 - Normal HR<br>BPM > 90 - Tachycardia</td>
+				<td>BPM <50 - Bradicardia <50> <BPM <90 - FC Normal <br> BPM> 90 - Taquicardia</td>
 			</tr>
 			<tr>
-				<td><h6><i><font color="blue">This is an approximated bpm app.</font></i></h6></td>
+				<td><h6><i><font color="blue">Este é um aplicativo BPM aproximado.</font></i></h6></td>
 			</tr>
 		</table>
 	</div>
