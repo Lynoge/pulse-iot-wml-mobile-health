@@ -5,7 +5,7 @@
 **__Nível de habilidade__**: Intermediário
 **__N.B__**: Todos os serviços utilizados nesta solução utilizam o plano Lite. 
 
-# MyPulse - Um aplicativo de saúde móvel do IoT Waton Machine Learning
+# Pulsação - Um aplicativo de saúde móvel do IoT Waton Machine Learning
 
 A idéia por trás deste aplicativo é ter uma maneira de verificar as taxas de pulso com os dispositivos mais disponíveis, os telefones celulares. Aqui está uma breve descrição do padrão de código:
 
