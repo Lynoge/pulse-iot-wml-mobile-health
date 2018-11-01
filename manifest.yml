@@ -1,7 +1,12 @@
+---
+declared-services:
+  servico_iot:
+	label: iotf_service
+	plan: standard
 applications:
-- name: mypulse
-  host: mypulse
-  instances: 1
-  domain: mybluemix.net
-  memory: 256M
+- name: iotf-service-demo
+  path: .
   command: node server.js
+  memory: 256M
+  services:
+  - servico_iot
