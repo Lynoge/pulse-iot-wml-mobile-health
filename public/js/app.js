@@ -7,7 +7,7 @@ var subTopic = 'iot-2/cmd/buzz/fmt/json';
 var sensordata = {};
 sensordata.d = {};
 
-// Pulse metrics
+// Métricas de pulso
 var fps = 50, mduration = 6000, n = 1;
 var accelData = [], accelTimes = [], startTime = new Date();
 var c,t;
@@ -17,10 +17,10 @@ $(document).ready(function() {
 	$('select').material_select();
 	initchart();
 	if( !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) )
-		alert("This does not look like a mobile device - please load this page on a smartphone or tablet!");
+		alert("Isto não se parece com um dispositivo móvel - por favor, carregue esta página em um smartphone ou tablet!");
 });
 
-/* utility functions */
+/* funções de utilidade */
 function standardDeviation(values){
   var avg = average(values);
 
@@ -73,7 +73,7 @@ function countHeartBeats(heartSignal) {
 	return beats;
 }
 
-/* motion and heart rate calculation */
+/* cálculo de movimento e ritmo cardíaco */
 function calculateHeartRate(event){
   accelData.push(event.accelerationIncludingGravity.y);
   accelTimes.push(new Date() - startTime);
@@ -81,23 +81,23 @@ function calculateHeartRate(event){
               fps = accelData.length / (new Date() - startTime) * 1000;
 	if (averageBpm != 0) {
 		document.getElementById("pulse").innerHTML = "<h3 style='font-size:18pt' align='center'>"+(averageBpm==50?"<50":(averageBpm==140?">140":Math.round(averageBpm)))
-    +" beats/minute</h3>current bpm: "+(bpm==50?"<50":(bpm==140?">140":bpm))+"<br> heartbeats: "+heartbeats+" in "
-    +(mduration/1000)+" seconds <br> sensor data: "+Math.round(fps)+"Hz <br> ML Predicted Pulse: "+sensordata.d.newbpm || 0;
+    +" batimentos/minuto</h3>bpm atual: "+(bpm==50?"<50":(bpm==140?">140":bpm))+"<br> batimentos cardíacos: "+heartbeats+" em "
+    +(mduration/1000)+" segundos <br> dados do sensor: "+Math.round(fps)+"Hz <br> Pulso Previsto de ML: "+sensordata.d.newbpm || 0;
     sensordata.d.bpm = bpm;
     sensordata.d.heartbeats = heartbeats;
     sensordata.d.seconds = mduration/1000;
     autoPredictPulseRate();
 	} else if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-		$("#output").html('<img src="/img/heart.png" height="77" width="77" align="center"><br/>Waiting for accelerometer to pick up your heartbeat... <b>Don\'t move</b>, keep the phone against your chest, and please be patient.<!--<h4><u>Firmly</u> press the bottom of your smartphone against your chest, and wait <u>without moving</u></h4>-->');
+		$("#output").html('<img src="/img/heart.png" height="77" width="77" align="center"><br/>Esperando acelerômetro para pegar o seu batimento cardíaco ... <b>Não se move</b>, mantenha o telefone contra o peitot, e por favor seja paciente.<!--<h4><u>Firmemente</u>pressione a parte inferior do smartphone contra o peito e espere <u>sem se mover</u></h4>-->');
 	} else {
-		$("#output").html("<h1>This is not a mobile device, or no accelerometers detected. Please load this page on a smartphone or tablet instead!</h1>");
+		$("#output").html("<h1>Este não é um dispositivo móvel ou nenhum acelerômetro detectado. Por favor, carregue esta página em um smartphone ou tablet!</h1>");
   }
-	// smoothing with savitzky golay filter
+	// suavização com filtro golitz savitzky
 	var heartSignal = smooth(accelData);
   updatechart(heartSignal, "graph");
 	heartbeats = countHeartBeats(heartSignal);
 
-	// calculate beats per minute (use weighted rolling average)
+	// calcular batidas por minuto (use média ponderada)
 	var currentBpm = heartbeats/(mduration/1000) * 60.0;
 	if (bpm != 0 && (averageBpm != 0 || currentBpm > 50 && currentBpm < 140)) {
 		averageBpm = 0.3*currentBpm + 0.7*(averageBpm + (currentBpm - averageBpm)/n);
@@ -109,14 +109,14 @@ function calculateHeartRate(event){
 		currentBpm = 140;
 	bpm = currentBpm;
 
-	// reset plot arrays
+	// redefinir matrizes de plotagem
   	accelData = [];
   	accelTimes = [];
   	startTime = new Date();
   }
 }
 
-/* plotting functions */
+/* funções de plotagem */
 var m = [1, 1, 1, 1]; // margins
 var graphw = 850 - m[1] - m[3];
 var graphh = 200 - m[0] - m[2];
@@ -196,7 +196,7 @@ function register() {
   xhr.send(null);
 }
 
-/** Watson ML performance **/
+/** Desempenho do Watson ML **/
 function updateFormOnSubmit() {
   document.getElementById('submit').disabled = true;
   document.getElementById('loading').style.display = 'block';
@@ -270,7 +270,7 @@ function clearData() {
   xhr.send(null);
 }
 
-/** IoT initiations **/
+/** Inicialização de IoT **/
 function init() {
   var name = "mypulse", org = "quickstart";
   if (localStorage && ('iotf' in localStorage)) {
@@ -332,9 +332,9 @@ function onMessageArrived(message) {
 function onConnect() {
   var connStatus = document.getElementById("connStatus");
   var devId = document.getElementById("devId");
-  connStatus.innerHTML = "Status: <span style=\"color:green\"><b>Connected</b></span>";
+  connStatus.innerHTML = "Status: <span style=\"color:green\"><b>Conectado</b></span>";
   devId.innerHTML = "DeviceID: "+iotfData.deviceId;
-  console.log("Connected");
+  console.log("Conectado");
   msgInterval = window.setInterval(sensordata.publish, 250);
   window.setInterval(function(){
     getSensorData();
@@ -346,14 +346,14 @@ function onConnect() {
 }
 
 function onConnectFailure(error) {
-  connStatus.innerHTML = 'Connect Failed';
-  console.log("Connect Failed");
+  connStatus.innerHTML = 'Conexão Falhou';
+  console.log("Conexão Falhou");
   console.log(error.errorCode);
   console.log(error.errorMessage);
 }
 
 function onConnectionLost(response) {
-  connStatus.innerHTML = "Status: <span style=\"color:red\"><b>Disconnected</b></span>";
+  connStatus.innerHTML = "Status: <span style=\"color:red\"><b>Desconectado</b></span>";
   console.log("onConnectionLost")
   if (response.errorCode !== 0) {
       console.log("onConnectionLost:"+response.errorMessage);
@@ -380,7 +380,7 @@ function deviceMotionHandler(eventData) {
   var accelY = Math.round(acceleration.y);
   var accelZ = Math.round(acceleration.z);
 
-  // Grab the acceleration from the results
+  // Agarre a aceleração dos resultados
   sensordata.d.accelX = accelX;
   sensordata.d.accelY = accelY;
   sensordata.d.accelZ = accelZ;
@@ -390,19 +390,19 @@ function deviceMotionHandler(eventData) {
   document.getElementById("speed").innerHTML = "Speed: "+speed;
 }
 
-/** Send metrics to Cloudant **/
+/** Enviar métricas para o Cloudant **/
 function getSensorData() {
   $.ajax({
   	url: "/api/" + sensordata.toJson(),
     error: function(xhr, status, error) {
       if(xhr.status==401 && xhr.status==404){
-        console.log("Sending sensor data with status error " + xhr.status);
+        console.log("Envio de dados do sensor com erro de status " + xhr.status);
   		} else {
-        console.log("Failed to authenticate! "+error);
+        console.log("Falha ao autenticar! "+error);
   		}
   	},
   	success: function(){
-      console.log("Phone Data sent! " + xhr);
+      console.log("Dados do telefone enviados! " + xhr);
   	}
   });
 }
